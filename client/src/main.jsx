@@ -9,6 +9,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import UnprotectedRoute from "./utils/UnprotectedRoute";
 
 import { AuthProvider } from "./context/authContext";
+import MoviePage from "./pages/MoviePage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage />,
+      },
+      {
+        path: "/movie/:name",
+        element: <MoviePage />,
       },
     ],
   },

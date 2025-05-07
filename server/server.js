@@ -2,8 +2,8 @@ require("dotenv").config()
 
 
 const express = require("express");
-const cookieParser = require("cookie-parser")
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
 app.use(cors({
@@ -11,10 +11,11 @@ app.use(cors({
     credentials: true
   }));
 app.use(express.json())
-app.use(cookieParser());
+app.use("/images/posters", express.static(path.join(__dirname, "images", "posters")));
 
 const userRouter = require("./routes/users.js")
 const authRouter = require("./routes/auth.js");
+const movieRouter = require("./routes/movies.js")
 
 app.get("/", (req,res)=>{
     res.send("Hello");
@@ -22,5 +23,6 @@ app.get("/", (req,res)=>{
 
 app.use("/users", userRouter)
 app.use("/auth", authRouter)
+app.use("/movies", movieRouter)
 
 app.listen(3000);

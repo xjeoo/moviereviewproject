@@ -58,7 +58,7 @@ router.post("/login", async (req, res) => {
     }
   );
 
-  const expirationDate = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+  const expirationDate = new Date(Date.now() + 30 * 60 * 1000);
 
   await setRefreshToken(refresh_token, expirationDate, userID);
 
@@ -192,7 +192,7 @@ const setRefreshToken = async (refresh_token, expirationDate, userID) => {
     const exists = rows.length > 0;
     if (exists) {
       const [updateRows] = await pool.execute(
-        "UPDATE refresh_tokens SET token = ? , expirationDate = ? WHERE user_id = ?",
+        "UPDATE refresh_tokens SET token = ? , expiration_date = ? WHERE user_id = ?",
         [refresh_token, expirationDate, userID]
       );
     } else {
