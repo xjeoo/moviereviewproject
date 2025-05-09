@@ -17,6 +17,22 @@ router.get("/", async (req, res)=>{
 
 })
 
+router.get("/id", async (req, res)=>{
+    const movie_id = req.query.m;
+    const poster_id = req.query.p;
+
+    try {
+        const [reviews] = await pool.execute("SELECT * FROM review WHERE movie_id = ? AND poster_id = ?", [movie_id, poster_id]);
+        const review = reviews.length > 0 ? reviews[0] : null;
+        if(review === null) return res.status(404).send("Review doesn't exist");
+
+        return res.status(200).send(review.review_id);
+    } catch (err) {
+        res.status(500).send("Error fetching reviews");
+    }
+
+})
+
 router.post("/post", async (req, res)=>{
     const movieID = req.body.movie_id;
     const userID = req.body.user_id;
@@ -62,6 +78,18 @@ router.patch("/edit", async (req,res)=>{
         return res.status(500).send("Failed editing review");
     }
 
+})
+
+router.delete("/delete/:reviewID", async (req, res)=>{
+    const reviewID = req.params.reviewID;
+    if(reviewID === null || reviewID === undefined) res.status(400).send("Review ID required");
+
+    try {
+        const [rows] = await pool.execute("DELETE FROM review WHERE review_id = ?", [reviewID]);
+        return res.status(200).send("Review deleted successfuly");
+    } catch (err) {
+        return res.status(500).send("Database error");
+    }
 })
 
 

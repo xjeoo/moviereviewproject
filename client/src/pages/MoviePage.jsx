@@ -8,6 +8,7 @@ import { useAuth } from "../context/authContext";
 import BackButton from "../components/BackButton";
 import OwnedReview from "../components/OwnedReview";
 import EditPopUp from "../components/EditPopUp";
+import DeletePopUp from "../components/DeletePopUp";
 
 const MoviePage = () => {
   const [movieInfo, setMovieInfo] = useState({});
@@ -15,6 +16,7 @@ const MoviePage = () => {
   const [posterID, setPosterID] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const params = useParams();
   const movieName = params.name;
@@ -60,6 +62,13 @@ const MoviePage = () => {
   const stopEditing = () => {
     setIsEditing(false);
   };
+
+  const startDelete = () => {
+    setIsDeleting(true);
+  };
+  const stopDelete = () => {
+    setIsDeleting(false);
+  };
   return (
     <>
       {isEditing ? (
@@ -73,6 +82,15 @@ const MoviePage = () => {
             // AICI TREBUIE SA II DAU SI POSTER ID
             // PROBABIL FAC UN STATE DE UNDE SA IAU review[index]
           }
+        </div>
+      ) : null}
+      {isDeleting ? (
+        <div className="absolute w-full h-full justify-center items-center">
+          <DeletePopUp
+            movieID={movieInfo.movie_id}
+            posterID={posterID}
+            stopDelete={stopDelete}
+          />
         </div>
       ) : null}
       <Navbar />
@@ -126,6 +144,7 @@ const MoviePage = () => {
                     rating={r.rating}
                     text={r.comment}
                     startEdit={startEditing}
+                    startDelete={startDelete}
                     setPosterID={setPosterID}
                     key={index}
                   />
