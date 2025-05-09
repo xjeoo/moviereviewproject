@@ -56,14 +56,10 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      <div className="w-dvw h-full px-22 py-12 grid grid-cols-5 gap-7">
+      <div className="w-full h-full px-22 py-12 grid grid-cols-5 gap-x-4 gap-y-12 min-w-max">
         {!isLoading ? (
           movies.map((movie) => (
-            <MovieCard
-              name={movie.movie_name}
-              path={movie.path}
-              key={movie.path}
-            />
+            <MovieCard path={movie.path} key={movie.path} />
           ))
         ) : (
           <h1>Loading...</h1>

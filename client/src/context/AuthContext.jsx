@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -22,10 +23,19 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("userData", JSON.stringify(user));
   };
 
-  const logout = () => {
+  const logout = (userID) => {
     const updatedUserData = { ...userData, isLoggedIn: false };
     setUserData(updatedUserData);
+    if (userData !== undefined)
+      if (userData.data !== null)
+        axios
+          .delete(`http://localhost:3000/auth/logout/${userID}`)
+          .then((res) => console.log(res.data))
+          .catch((err) => {
+            console.log(err.response?.data);
+          });
     localStorage.removeItem("userData");
+
     window.location.reload();
   };
 

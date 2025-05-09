@@ -31,7 +31,7 @@ const ProtectedRoute = () => {
           })
           .catch((err) => {
             console.log(err);
-            authData.logout();
+            authData.logout(authData.data.user_id);
           });
     } catch (err) {
       console.log(err);

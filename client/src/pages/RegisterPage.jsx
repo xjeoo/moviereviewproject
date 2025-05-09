@@ -63,7 +63,7 @@ const RegisterPage = () => {
 
         <div className="flex flex-col gap-2.5 my-6">
           <input
-            className="bg-[#2e8485] pl-3 py-1 rounded-2xl focus:ring-1 focus:ring-cyan-100 outline-0 mb-2"
+            className="bg-indigo-400 pl-3 py-1 rounded-2xl focus:ring-1 focus:ring-cyan-100 outline-0 mb-2"
             type="text"
             name="username"
             placeholder="username"
@@ -71,7 +71,7 @@ const RegisterPage = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            className="bg-[#2e8485] pl-3 py-1 rounded-2xl focus:ring-1 focus:ring-cyan-100 outline-0"
+            className="bg-indigo-400 pl-3 py-1 rounded-2xl focus:ring-1 focus:ring-cyan-100 outline-0"
             type="password"
             name="password"
             placeholder="password"
@@ -79,7 +79,7 @@ const RegisterPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
-            className="bg-[#2e8485] pl-3 py-1 rounded-2xl focus:ring-1 focus:ring-cyan-100 outline-0"
+            className="bg-indigo-400 pl-3 py-1 rounded-2xl focus:ring-1 focus:ring-cyan-100 outline-0"
             type="password"
             name="confirm-password"
             placeholder="confirm password"

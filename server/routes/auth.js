@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
-const users = require("../data/user.js");
-
 const pool = require("../db.js");
 
 router.post("/login", async (req, res) => {
@@ -70,10 +68,18 @@ router.post("/login", async (req, res) => {
   });
 });
 
+router.delete("/logout/:id", async(req, res)=>{
+  const userID = req.params.id
+  if(userID === undefined) res.status(400).send("User ID required");
+  try {
+  const [delRows] = await pool.execute("DELETE FROM refresh_tokens WHERE user_id = ?", [userID]);
+  if(delRows.length === 0)res.status(500).send("Could't delete token");
+  res.status(200).send("Successful deletion")
+  } catch (error) {
+    
+  if(delRows.length === 0)res.status(500).send("Could't delete token");
+  }
 
-router.post("/logout", (req, res)=>{
-  const userID = req.body.ID
-  const [delRows] = pool.execute("DELETE FROM refresh_tokens WHERE user_id = ?", [userID]);
 })
 
 router.post("/register", async (req, res) => {
@@ -124,6 +130,7 @@ router.post("/verify", async (req, res) => {
       const newAccessToken = generateAccessToken({ username: user.username });
       res.status(201).json({
         username: user.username,
+        user_id: userID,
         access_token: newAccessToken,
         access_token_type: "refresh",
       });
@@ -197,7 +204,7 @@ const setRefreshToken = async (refresh_token, expirationDate, userID) => {
       );
     } else {
       const [insertRows] = await pool.execute(
-        "INSERT INTO refresh_tokens(token, expirationDate, user_id) VALUES(?, ?, ?)",
+        "INSERT INTO refresh_tokens(token, expiration_date, user_id) VALUES(?, ?, ?)",
         [refresh_token, expirationDate, userID]
       );
     }

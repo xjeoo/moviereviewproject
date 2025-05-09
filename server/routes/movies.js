@@ -42,19 +42,21 @@ router.get("/names", async (req, res) => {
   let limitReached = false;
   try {
     const [rows] = await pool.execute("SELECT COUNT(*) AS total from movie");
-    const totalMovies = rows[0].total; 
-    if (offset + limit >= totalMovies) limit = totalMovies - offset;
+    const totalMovies = rows[0].total;
+    if (offset + limit > totalMovies) {
+      limit = totalMovies - offset;
+      limitReached = true;
+    }
     if (offset >= totalMovies) limitReached = true;
     const [limitedRows] = await pool.execute(
       "SELECT movie_name, path FROM  movie LIMIT ? OFFSET ?",
       [limit.toString(), offset.toString()]
     );
-    res.json({movies: limitedRows, limitReached: limitReached});
+    res.json({ movies: limitedRows, limitReached: limitReached });
   } catch (err) {
     console.log(err);
     return res.status(400).send("Error fetching movies");
   }
 });
-
 
 module.exports = router;

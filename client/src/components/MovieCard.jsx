@@ -26,7 +26,7 @@ const MovieCard = ({ path }) => {
   return !isLoading ? (
     <Link
       to={`/movie/${movieInfo.path}`}
-      className="w-55 h-80 bg-gray-900 flex flex-col items-center relative rounded-xl group cursor-pointer mr-8 min-w-max max-w-max"
+      className="w-55 h-80 bg-gray-900 flex flex-col items-center relative rounded-xl group cursor-pointer min-w-max max-w-max"
     >
       <img
         src={movieInfo.url}

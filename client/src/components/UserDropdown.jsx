@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 
-const UserDropdown = ({ username }) => {
+const UserDropdown = ({ username, userID }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const auth = useAuth();
@@ -15,7 +15,7 @@ const UserDropdown = ({ username }) => {
     if (action === "profile") {
       navigate(`/profile/${username}`);
     } else if (action === "logout") {
-      auth.logout();
+      auth.logout(userID);
     }
   };
 
