@@ -34,12 +34,7 @@ const OwnedReview = ({
       </h1>
       <div className="flex items-center gap-1 text-3xl text-yellow-300 mb-1">
         {stars.map((u) => (
-          <div
-            key={u}
-            onClick={() => {
-              setStars(u + 1);
-            }}
-          >
+          <div className="z-10" key={u}>
             {u <= rating ? "★" : "☆"}
           </div>
         ))}

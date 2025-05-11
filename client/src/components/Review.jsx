@@ -24,14 +24,7 @@ const Review = ({ userID, rating, text }) => {
       <h1 className="text-2xl">{username}</h1>
       <div className="flex items-center gap-1 text-3xl text-yellow-300 mb-1">
         {stars.map((u) => (
-          <div
-            key={u}
-            onClick={() => {
-              setStars(u + 1);
-            }}
-          >
-            {u <= rating ? "★" : "☆"}
-          </div>
+          <div key={u}>{u <= rating ? "★" : "☆"}</div>
         ))}
       </div>
       <p className="text-xl text-gray-200">{text}</p>

@@ -5,7 +5,6 @@ import GuestDropdown from "./GuestDropdown";
 import { useAuth } from "../context/authContext";
 
 const Navbar = () => {
-  //trebuie sa pun link-uri in return
   const auth = useAuth();
   return (
     <nav className="w-full h-18 bg-indigo-600 flex justify-between px-10 items-center relative">
