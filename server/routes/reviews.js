@@ -33,6 +33,7 @@ router.get("/id", async (req, res)=>{
 
 })
 
+
 router.post("/post", async (req, res)=>{
     const movieID = req.body.movie_id;
     const userID = req.body.user_id;

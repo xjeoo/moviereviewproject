@@ -12,7 +12,7 @@ const Review = ({ userID, rating, text }) => {
     axios
       .get(apiRoute + `?id=${userID}`)
       .then((res) => {
-        setUsername(res.data);
+        setUsername(res.data.username);
       })
       .catch((err) => {
         console.log(err.response?.data);

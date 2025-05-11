@@ -18,8 +18,9 @@ router.post("/search", async (req, res) => {
   const input = req.body.input;
   const genre = req.body.genre;
 
-  const finalInput = "%" + input.toLowerCase() + "%";
-  console.log(genre)
+  const finalInput = input.toLowerCase() + "%";
+  
+
   if (!genre || genre === "Any")
  {
     try {
@@ -27,7 +28,6 @@ router.post("/search", async (req, res) => {
         "SELECT movie_id, movie_name, path, rating, description FROM movie WHERE LOWER(movie_name) LIKE ?",
         [finalInput]
       );
-      console.log("a intrat aici")
       return res.status(200).json(rows);
     } catch (err) {
       return res.status(500).send(err);
@@ -43,7 +43,6 @@ router.post("/search", async (req, res) => {
 
       [finalInput, genre]
     );
-    console.log("ba nu, a intrat aici")
     return res.status(200).json(rows);
   } catch (err) {
     return res.status(500).send(err);

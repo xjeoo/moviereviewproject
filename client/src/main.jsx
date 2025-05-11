@@ -5,11 +5,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import MoviePage from "./pages/MoviePage";
+import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import UnprotectedRoute from "./utils/UnprotectedRoute";
 
 import { AuthProvider } from "./context/authContext";
-import MoviePage from "./pages/MoviePage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/movie/:name",
         element: <MoviePage />,
+      },
+      {
+        path: "/profile/:id",
+        element: <ProfilePage />,
       },
     ],
   },

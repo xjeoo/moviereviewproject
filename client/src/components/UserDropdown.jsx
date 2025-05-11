@@ -13,7 +13,7 @@ const UserDropdown = ({ username, userID }) => {
     setIsOpen(false);
 
     if (action === "profile") {
-      navigate(`/profile/${username}`);
+      navigate(`/profile/${auth.data.user_id}`);
     } else if (action === "logout") {
       auth.logout(userID);
     }

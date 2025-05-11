@@ -159,7 +159,7 @@ const MoviePage = () => {
               )}
             </>
           ) : (
-            <p>No reviews yet</p>
+            <p className="text-xl">No reviews yet</p>
           )}
         </div>
       </div>
