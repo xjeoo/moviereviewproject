@@ -6,7 +6,7 @@ const router = express.Router();
 
 const pool = require("../db.js");
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res) => { //verifies if logged in
   const username = req.body.username;
   const password = req.body.password;
 
@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
   });
 });
 
-router.delete("/logout/:id", async(req, res)=>{
+router.delete("/logout/:id", async(req, res)=>{ //logs user out by user id (deletes refresh token)
   const userID = req.params.id
   if(userID === undefined) res.status(400).send("User ID required");
   try {
@@ -82,7 +82,7 @@ router.delete("/logout/:id", async(req, res)=>{
 
 })
 
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res) => { //registers user if valid information
   const username = req.body.username;
   const password = req.body.password;
 
@@ -112,7 +112,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/verify", async (req, res) => {
+router.post("/verify", async (req, res) => { // verifies if user is still logged in and updates access token
   const authHeader = req.headers.authorization;
   const userID = req.body.user_id;
   const access_token = authHeader && authHeader.split(" ")[1];

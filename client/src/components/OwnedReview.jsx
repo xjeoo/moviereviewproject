@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const OwnedReview = ({
@@ -29,9 +30,12 @@ const OwnedReview = ({
 
   return (
     <div className="flex flex-col outline-1 outline-amber-50 px-8 py-8 rounded-2xl pb-8 max-w-[80%] relative">
-      <h1 className="text-2xl font-bold z-10  inline-block w-max">
+      <Link
+        to={`/profile/${userID}`}
+        className="text-2xl font-bold z-10  inline-block w-max"
+      >
         {username}
-      </h1>
+      </Link>
       <div className="flex items-center gap-1 text-3xl text-yellow-300 mb-1">
         {stars.map((u) => (
           <div className="z-10" key={u}>

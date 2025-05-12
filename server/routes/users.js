@@ -5,7 +5,7 @@ const router = express.Router();
 
 const pool = require("../db.js")
 
-router.get("/", async (req, res)=>{
+router.get("/", async (req, res)=>{ //get username by user id
     const id = req.query.id;
     try {
         const [rows] = await pool.execute("SELECT username, user_id FROM users WHERE user_id = ?", [id]);
@@ -19,7 +19,7 @@ router.get("/", async (req, res)=>{
     
 })
 
-router.get("/:id/reviews", async (req,res)=>{
+router.get("/:id/reviews", async (req,res)=>{ //get reviewed movies by user id
     const userID = req.params.id;
     
     try {

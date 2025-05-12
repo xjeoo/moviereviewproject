@@ -96,6 +96,16 @@ const HomePage = () => {
       <Navbar />
       <div className="flex justify-center  w-full mt-10 ">
         <div className="flex justify-between items-center gap-10 z-10">
+          {searched ? (
+            <button
+              className="bg-indigo-600 px-0.5 py-0.5 rounded-4xl cursor-pointer"
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              <img src="/icons/refresh.png" alt="refresh" className="w-9 h-9" />
+            </button>
+          ) : null}
           <div className="min-w-fit">
             <input
               type="text"

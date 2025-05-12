@@ -4,7 +4,7 @@ const router = express.Router();
 
 const pool = require("../db.js");
 
-router.get("/movie", async (req, res) => {
+router.get("/movie", async (req, res) => { // get movie info by movie name(path)
   const name = req.query.name;
   if (!name) return res.status(400).send("Name query required");
 
@@ -16,7 +16,7 @@ router.get("/movie", async (req, res) => {
 
   const info = rows[0];
 
-  const [genreRows] = await pool.execute(
+  const [genreRows] = await pool.execute( // get movie genres by movie id
     `SELECT g.genre_id, g.genre_name
      FROM genre g
      JOIN movie_genre mg ON g.genre_id = mg.genre_id
@@ -36,7 +36,7 @@ router.get("/movie", async (req, res) => {
   res.json(completeInfo);
 });
 
-router.get("/names", async (req, res) => {
+router.get("/names", async (req, res) => { // get names by offset and limit for homepage
   let offset = parseInt(req.query.offset) || 0;
   let limit = parseInt(req.query.limit) || 5;
   let limitReached = false;

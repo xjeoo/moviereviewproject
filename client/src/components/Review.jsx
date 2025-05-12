@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Review = ({ userID, rating, text }) => {
@@ -21,7 +22,9 @@ const Review = ({ userID, rating, text }) => {
 
   return (
     <div className="flex flex-col outline-1 outline-amber-50 px-8 py-8 rounded-2xl pb-8 max-w-[80%]">
-      <h1 className="text-2xl">{username}</h1>
+      <Link to={`/profile/${userID}`} className="text-2xl max-w-fit">
+        {username}
+      </Link>
       <div className="flex items-center gap-1 text-3xl text-yellow-300 mb-1">
         {stars.map((u) => (
           <div key={u}>{u <= rating ? "★" : "☆"}</div>
