@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import MovieCard from "../components/MovieCard";
+import BackButton from "../components/BackButton";
 import { useParams } from "react-router-dom";
 
 const ProfilePage = () => {
@@ -41,6 +42,8 @@ const ProfilePage = () => {
   return (
     <>
       <Navbar />
+      <BackButton />
+
       {!isLoading ? (
         <div className="w-full min-h-dvh px-15 py-6">
           <div className="w-full h-fit flex flex-col gap-6 outline-1 outline-amber-50 rounded-4xl px-16 py-16">

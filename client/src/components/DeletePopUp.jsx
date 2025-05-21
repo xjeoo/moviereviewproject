@@ -33,7 +33,9 @@ const DeletePopUp = ({ movieID, posterID, stopDelete }) => {
   const deleteReview = () => {
     if (auth.data === null) navigate("/login");
     axios
-      .delete(apiRoute + `/delete/${reviewID}`)
+      .delete(apiRoute + `/delete/${reviewID}`, {
+        headers: { Authorization: `Bearer ${auth.data.access_token}` },
+      })
       .then((res) => {
         stopDelete();
         window.location.reload();

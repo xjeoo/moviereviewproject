@@ -14,7 +14,7 @@ app.use(express.json())
 app.use("/images/posters", express.static(path.join(__dirname, "images", "posters")));
 
 const userRouter = require("./routes/users.js")
-const authRouter = require("./routes/auth.js");
+const authRouter = require("./routes/auth.js").router;
 const movieRouter = require("./routes/movies.js")
 const reviewRouter = require("./routes/reviews.js")
 const genreRouter = require("./routes/genres.js")

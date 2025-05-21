@@ -96,9 +96,9 @@ const MoviePage = () => {
       <Navbar />
 
       <BackButton />
-      <div className="px-20 py-14 min-w-max max-w-[70%] mx-auto outline-1 outline-amber-50 rounded-4xl my-14 backdrop-blur-xs">
-        <div className="flex items-start">
-          <div className="w-95 h-120">
+      <div className="px-20 py-14 min-w-fit max-w-[70%] mx-auto outline-1 outline-amber-50 rounded-4xl my-14 backdrop-blur-xs">
+        <div className="flex md:items-start md:flex-row flex-col justify-center items-center ">
+          <div className="w-95 h-120 min-w-fit">
             <img
               src={movieInfo.url}
               alt={movieInfo.movie_name}
@@ -122,7 +122,7 @@ const MoviePage = () => {
               </div>
             ) : null}
             <p className="text-xl font-bold">⭐ {movieInfo.rating || 0}</p>
-            <div className="flex-1 pt-10">
+            <div className="flex-1 pt-10 max-w-[70%]">
               <h2 className="text-2xl font-bold ">Description:</h2>
               <article className="italic mt-6">{movieInfo.description}</article>
             </div>
@@ -133,7 +133,7 @@ const MoviePage = () => {
           </div>
         </div>
         <hr className="mt-10" />
-        <div className="flex flex-col pt-10 gap-y-4">
+        <div className="flex flex-col pt-10 gap-y-4 max-w-[70%]">
           <CreateReview movieID={movieInfo.movie_id} />
           {reviews.length > 0 ? (
             <>

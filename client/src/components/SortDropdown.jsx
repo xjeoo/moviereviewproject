@@ -1,36 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const SearchCriteria = ({ criteria, setCriteria }) => {
+const GenreDropdown = ({ sortMode, setSortMode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const SortDropdown = () => setIsOpen(!isOpen);
 
   const handleOption = (action) => {
     setIsOpen(false);
-
-    if (action === "genre") {
-      setCriteria("Genre");
-    } else if (action === "rating") {
-      setCriteria("Rating");
-    }
+    setSortMode(action);
   };
 
   return (
     <div className="relative inline-block text-left">
       <button
-        onClick={toggleDropdown}
+        onClick={SortDropdown}
         className="bg-indigo-500 hover:bg-indigo-500 px-4 py-2 rounded cursor-pointer"
       >
-        {criteria}
+        {sortMode}
       </button>
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-40 bg-indigo-500 hover:bg-indigo-900 rounded shadow-lg z-10 ">
           <button
-            onClick={() => handleOption("genre")}
+            onClick={() => handleOption("Ascending")}
             className="w-full flex justify-center px-4 py-2 text-left bg-indigo-500 hover:bg-indigo-900 cursor-pointer"
           >
-            Genre
+            Ascending
+          </button>
+          <button
+            onClick={() => handleOption("Descending")}
+            className="w-full flex justify-center px-4 py-2 text-left bg-indigo-500 hover:bg-indigo-900 cursor-pointer"
+          >
+            Descending
           </button>
         </div>
       )}
@@ -38,4 +40,4 @@ const SearchCriteria = ({ criteria, setCriteria }) => {
   );
 };
 
-export default SearchCriteria;
+export default GenreDropdown;

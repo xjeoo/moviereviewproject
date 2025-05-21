@@ -14,9 +14,9 @@ router.get("/", async (req, res) => { //get all existent genres
   }
 });
 
-router.post("/search", async (req, res) => { //  search by name or joint search by name and genre
-  const input = req.body.input;
-  const genre = req.body.genre;
+router.get("/search", async (req, res) => { //  search by name or joint search by name and genre
+  const input = req.query.q;
+  const genre = req.query.g;
 
   const finalInput = input.toLowerCase() + "%";
 
@@ -51,5 +51,6 @@ router.post("/search", async (req, res) => { //  search by name or joint search 
     return res.status(500).send(err);
   }
 });
+
 
 module.exports = router;

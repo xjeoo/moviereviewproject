@@ -5,6 +5,8 @@ const router = express.Router();
 
 const pool = require("../db.js");
 
+const verifyToken = require("./auth.js").verifyToken;
+
 router.get("/", async (req, res)=>{ // get reviews for specific movie by movie id
     const movieID = req.query.movieID;
 
@@ -34,7 +36,7 @@ router.get("/id", async (req, res)=>{ //get review by movie id and user id (post
 })
 
 
-router.post("/post", async (req, res)=>{ // post review
+router.post("/post", verifyToken, async (req, res)=>{ // post review
     const movieID = req.body.movie_id;
     const userID = req.body.user_id;
     const rating = req.body.rating;
@@ -56,7 +58,7 @@ router.post("/post", async (req, res)=>{ // post review
     }
 
 })
-router.patch("/edit", async (req,res)=>{ //edit review
+router.patch("/edit", verifyToken, async (req,res)=>{ //edit review
     const movieID = req.body.movie_id;
     const userID = req.body.user_id;
     const rating = req.body.rating;
@@ -81,7 +83,7 @@ router.patch("/edit", async (req,res)=>{ //edit review
 
 })
 
-router.delete("/delete/:reviewID", async (req, res)=>{ //delete review by id
+router.delete("/delete/:reviewID", verifyToken, async (req, res)=>{ //delete review by id
     const reviewID = req.params.reviewID;
     if(reviewID === null || reviewID === undefined) res.status(400).send("Review ID required");
 

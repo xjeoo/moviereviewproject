@@ -28,12 +28,18 @@ const EditPopUp = ({ movieID, posterID, stopEdit }) => {
     setSuccess(false);
     if (auth.data === null) navigate("/login");
     axios
-      .patch(apiRoute, {
-        movie_id: movieID,
-        user_id: auth.data.user_id,
-        rating: stars,
-        text: text,
-      })
+      .patch(
+        apiRoute,
+        {
+          movie_id: movieID,
+          user_id: auth.data.user_id,
+          rating: stars,
+          text: text,
+        },
+        {
+          headers: { Authorization: `Bearer ${auth.data.access_token}` },
+        }
+      )
       .then((res) => {
         console.log(res);
         setSuccess(true);
@@ -73,7 +79,7 @@ const EditPopUp = ({ movieID, posterID, stopEdit }) => {
             {rating.map((u) => (
               <div
                 key={u}
-                className="cursor-pointer"
+                className="cursor-pointer hover:scale-[1.1]"
                 onClick={() => {
                   setStars(u);
                 }}

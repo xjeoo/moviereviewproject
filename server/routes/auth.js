@@ -213,4 +213,4 @@ const setRefreshToken = async (refresh_token, expirationDate, userID) => {
   }
 };
 
-module.exports = router;
+module.exports = {router, verifyToken};

@@ -49,7 +49,7 @@ router.get("/names", async (req, res) => { // get names by offset and limit for 
     }
     if (offset >= totalMovies) limitReached = true;
     const [limitedRows] = await pool.execute(
-      "SELECT movie_name, path FROM  movie LIMIT ? OFFSET ?",
+      "SELECT movie_name, path, rating FROM  movie LIMIT ? OFFSET ?",
       [limit.toString(), offset.toString()]
     );
     res.json({ movies: limitedRows, limitReached: limitReached });

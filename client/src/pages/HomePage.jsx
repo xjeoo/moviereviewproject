@@ -5,17 +5,20 @@ import Navbar from "../components/Navbar";
 import MovieCard from "../components/MovieCard";
 import SearchCriteria from "../components/SearchCriteria";
 import GenreDropdown from "../components/GenreDropdown";
+import SortDropdown from "../components/SortDropdown";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [searchedOffset, setSearchedOffset] = useState(0);
   const [offset, setOffset] = useState(5);
   const [isLoading, setIsLoading] = useState(true);
   const [limitReached, setLimitReached] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [criteria, setCriteria] = useState("Search by");
   const [criteriaValue, setCriteriaValue] = useState(null);
+  const [sortMode, setSortMode] = useState("Sort By Rating");
 
   const initialLoadDone = useRef(false);
 
@@ -31,6 +34,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (offset > 5) loadMovies(offset, 5);
+    setMovies((prev) => sortMovies(prev));
   }, [offset]);
 
   useEffect(() => {
@@ -49,7 +53,9 @@ const HomePage = () => {
       .then((res) => {
         setMovies((prev) => [...prev, ...res.data.movies]);
         setLimitReached(res.data.limitReached);
-        console.log(movies, res.data);
+        setMovies((prev) => sortMovies(prev));
+        console.log(movies);
+
         setIsLoading(false);
       })
       .catch((err) => {
@@ -59,10 +65,12 @@ const HomePage = () => {
       });
   };
 
-  const loadSearchedMovies = (off, lim) => {};
-
   const handleLoadMore = () => {
-    setOffset((o) => o + 5);
+    if (searched) {
+      setSearchedOffset((o) => o + 5);
+    } else {
+      setOffset((o) => o + 5);
+    }
   };
   const handleShowLess = () => {
     setLimitReached(false);
@@ -77,13 +85,13 @@ const HomePage = () => {
 
   const handleSearch = () => {
     axios
-      .post(genreApiRoute + "/search", {
-        input: searchInput,
-        genre: criteriaValue || "Any",
-      })
+      .get(
+        genreApiRoute + `/search?q=${searchInput}&g=${criteriaValue || "Any"}`
+      )
       .then((res) => {
         setSearchedMovies(res.data);
         setSearched(true);
+        setSearchedMovies((prev) => sortMovies(prev));
         console.log(res.data);
       })
       .catch((err) => {
@@ -91,14 +99,30 @@ const HomePage = () => {
       });
   };
 
+  const sortMovies = (array) => {
+    let copy = [...array];
+
+    if (sortMode === "Ascending")
+      return copy.sort((a, b) => Number(a.rating) - Number(b.rating));
+    if (sortMode === "Descending")
+      return copy.sort((a, b) => Number(b.rating) - Number(a.rating));
+
+    return copy;
+  };
+
+  useEffect(() => {
+    if (searched) setSearchedMovies((prev) => sortMovies(prev));
+    else setMovies((prev) => sortMovies(prev));
+  }, [sortMode]);
+
   return (
     <>
       <Navbar />
       <div className="flex justify-center  w-full mt-10 ">
-        <div className="flex justify-between items-center gap-10 z-10">
+        <div className="flex lg:flex-row flex-col justify-between items-center gap-10 z-10">
           {searched ? (
             <button
-              className="bg-indigo-600 px-0.5 py-0.5 rounded-4xl cursor-pointer"
+              className="bg-indigo-500 px-0.5 py-0.5 rounded-4xl cursor-pointer min-w-fit"
               onClick={() => {
                 window.location.reload();
               }}
@@ -129,11 +153,19 @@ const HomePage = () => {
             {criteria === "Genre" ? (
               <GenreDropdown setCriteriaValue={setCriteriaValue} />
             ) : null}
+            <SortDropdown
+              movies={searchedMovies.length > 0 ? searchedMovies : movies}
+              setMovies={
+                searchedMovies.length > 0 ? setSearchedMovies : setMovies
+              }
+              sortMode={sortMode}
+              setSortMode={setSortMode}
+            />
           </div>
         </div>
       </div>
 
-      <div className="w-full h-full px-22 pb-12 pt-14 grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-x-4 gap-y-12 min-w-max">
+      <div className="w-full h-full justify-center px-22 pb-12 pt-14 grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1  lg:gap-x-4 gap-y-12 min-w-fit">
         {!isLoading ? (
           searched ? (
             searchedMovies.map((searchedmovie) => (
