@@ -10,7 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import UnprotectedRoute from "./utils/UnprotectedRoute";
 
-import { AuthProvider } from "./context/authContext";
+import { AuthProvider } from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {

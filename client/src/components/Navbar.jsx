@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UserDropdown from "./UserDropdown";
 import GuestDropdown from "./GuestDropdown";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
   const auth = useAuth();

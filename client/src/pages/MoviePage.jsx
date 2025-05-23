@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Review from "../components/Review";
 import CreateReview from "../components/CreateReview";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 import BackButton from "../components/BackButton";
 import OwnedReview from "../components/OwnedReview";
 import EditPopUp from "../components/EditPopUp";
