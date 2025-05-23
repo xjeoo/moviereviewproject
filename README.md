@@ -11,5 +11,5 @@ Un site simplu pentru review-uri de filme, creat ca proiect de învățare în w
 - Express
 - MySQL
 
-## Link aplicație deploy-uită
+## Link aplicație
 [https://moviereviewproject.vercel.app/](https://moviereviewproject.vercel.app/)
