@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const ProtectedRoute = () => {
+const UnprotectedRoute = () => {
   const authData = useAuth();
   const apiRoute = import.meta.env.VITE_AUTH_VERIFY_URL;
 
@@ -39,4 +39,4 @@ const ProtectedRoute = () => {
   else return <Outlet />;
 };
 
-export default ProtectedRoute;
+export default UnprotectedRoute;

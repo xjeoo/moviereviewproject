@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 const deleteApiRoute = import.meta.env.VITE_LOGOUT_URL;
+const navigate = useNavigate();
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -36,8 +38,8 @@ export const AuthProvider = ({ children }) => {
             console.log(err.response?.data);
           });
     localStorage.removeItem("userData");
-
-    window.location.reload();
+    setUserData(null);
+    navigate("/");
   };
 
   const values = {
