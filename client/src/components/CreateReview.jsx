@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const CreateReview = ({ movieID }) => {
+const CreateReview = ({ movieID, setReviewPosted }) => {
   const [text, setText] = useState("");
   const [stars, setStars] = useState(0);
   const rating = [1, 2, 3, 4, 5];
@@ -37,7 +37,7 @@ const CreateReview = ({ movieID }) => {
       .then((res) => {
         console.log(res);
         setSuccess(true);
-        window.location.reload();
+        setReviewPosted(true);
       })
       .catch((err) => {
         console.log(err);

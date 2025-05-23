@@ -17,6 +17,7 @@ const MoviePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [reviewPosted, setReviewPosted] = useState(false);
 
   const params = useParams();
   const movieName = params.name;
@@ -26,7 +27,24 @@ const MoviePage = () => {
   const auth = useAuth();
 
   useEffect(() => {
+    if (reviewPosted) {
+      axios
+        .get(reviewApiRoute + `?movieID=${movieInfo.movie_id}`)
+        .then((res) => {
+          console.log(res.data);
+          setReviews(res.data);
+          setReviewPosted(false);
+        })
+        .catch((err) => {
+          console.log(err.response?.data);
+          setReviewPosted(false);
+        });
+    }
+  }, [reviewPosted]);
+
+  useEffect(() => {
     // get movie info by name
+    window.scrollTo(0, 0);
     axios
       .get(movieApiRoute + `/movie?name=${movieName}`)
       .then((res) => {
@@ -35,6 +53,7 @@ const MoviePage = () => {
         axios
           .get(reviewApiRoute + `?movieID=${res.data.movie_id}`)
           .then((res) => {
+            console.log(res.data);
             setReviews(res.data);
           })
           .catch((err) => {
@@ -125,7 +144,10 @@ const MoviePage = () => {
         </div>
         <hr className="mt-10" />
         <div className="flex flex-col lg:items-start items-center pt-10 gap-y-4 max-w-[95%] w-fit">
-          <CreateReview movieID={movieInfo.movie_id} />
+          <CreateReview
+            movieID={movieInfo.movie_id}
+            setReviewPosted={setReviewPosted}
+          />
           {reviews.length > 0 ? (
             <>
               {reviews.map((r, index) =>
