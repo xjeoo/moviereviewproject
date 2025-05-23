@@ -3,6 +3,8 @@ import axios from "axios";
 
 const AuthContext = createContext();
 
+const deleteApiRoute = import.meta.env.VITE_LOGOUT_URL;
+
 export const useAuth = () => {
   return useContext(AuthContext);
 };
@@ -28,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     if (userData !== undefined)
       if (userData.data !== null)
         axios
-          .delete(`http://localhost:3000/auth/logout/${userID}`)
+          .delete(deleteApiRoute + userID)
           .then((res) => console.log(res.data))
           .catch((err) => {
             console.log(err.response?.data);

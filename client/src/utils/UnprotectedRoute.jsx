@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 const ProtectedRoute = () => {
   const authData = useAuth();
-  const apiRoute = "http://localhost:3000/auth/verify";
+  const apiRoute = import.meta.env.VITE_AUTH_VERIFY_URL;
 
   useEffect(() => {
     try {
@@ -18,7 +18,7 @@ const ProtectedRoute = () => {
             },
             {
               headers: {
-                authorization: `Bearer ${authData.data.access_token}`,
+                Authorization: `Bearer ${authData.data.access_token}`,
               },
               withCredentials: true,
             }
@@ -26,8 +26,6 @@ const ProtectedRoute = () => {
           .then((res) => {
             if (res.status === 201)
               localStorage.setItem("userData", JSON.stringify(res.data));
-
-            console.log(res.data);
           })
           .catch((err) => {
             console.log(err);

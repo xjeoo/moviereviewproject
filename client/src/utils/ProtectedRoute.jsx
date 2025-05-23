@@ -5,7 +5,7 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 const ProtectedRoute = () => {
   const authData = useAuth();
-  const apiRoute = "http://localhost:3000/auth/verify";
+  const apiRoute = import.meta.env.VITE_AUTH_VERIFY_URL;
 
   const [authorized, setAuthorized] = useState(false);
 
@@ -32,7 +32,6 @@ const ProtectedRoute = () => {
               localStorage.setItem("userData", JSON.stringify(res.data));
 
             setAuthorized(true);
-            console.log(res.data);
           })
           .catch((err) => {
             console.log(err);

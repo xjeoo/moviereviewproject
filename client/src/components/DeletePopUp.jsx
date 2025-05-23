@@ -10,7 +10,7 @@ const DeletePopUp = ({ movieID, posterID, stopDelete }) => {
   const rating = [1, 2, 3, 4, 5];
 
   const auth = useAuth();
-  const apiRoute = "http://localhost:3000/reviews";
+  const apiRoute = import.meta.env.VITE_REVIEWS_URL;
   const navigate = useNavigate();
 
   useEffect(() => {

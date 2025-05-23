@@ -6,7 +6,7 @@ const GenreDropdown = ({ setCriteriaValue }) => {
   const [genres, setGenres] = useState([]);
   const [genre, setGenre] = useState("Any");
 
-  const apiRoute = "http://localhost:3000/genres";
+  const apiRoute = import.meta.env.VITE_GENRES_URL;
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 

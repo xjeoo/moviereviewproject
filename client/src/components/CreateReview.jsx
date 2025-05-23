@@ -12,7 +12,7 @@ const CreateReview = ({ movieID }) => {
   const [error, setError] = useState("");
 
   const auth = useAuth();
-  const apiRoute = "http://localhost:3000/reviews/post";
+  const apiRoute = import.meta.env.VITE_REVIEWS_POST_URL;
   const navigate = useNavigate();
 
   const handlePost = () => {
@@ -61,7 +61,7 @@ const CreateReview = ({ movieID }) => {
       {success ? (
         <h2 className="text-xl text-green-600">Review posted</h2>
       ) : null}
-      <div className="relative w-[40%]">
+      <div className="relative min-w-fit w-[40%]">
         <div className="flex items-center gap-1 text-3xl text-yellow-300 mb-1">
           {rating.map((u) => (
             <div
@@ -76,7 +76,7 @@ const CreateReview = ({ movieID }) => {
           ))}
         </div>
         <textarea
-          className="min-h-20 bg-gray-300 text-black px-4 py-3 rounded-xl w-full"
+          className="min-h-20 min-w-80 bg-gray-300 text-black px-4 py-3 rounded-xl w-full"
           placeholder="Type your review:"
           value={text}
           onChange={(e) => {
@@ -85,7 +85,7 @@ const CreateReview = ({ movieID }) => {
         ></textarea>
         {text.trim() !== "" ? (
           <button
-            className="px-1.5 bg-indigo-500 rounded-4xl text-xl absolute right-2 bottom-2 cursor-pointer transition-colors"
+            className="px-1.5 bg-indigo-500 rounded-4xl  text-xl absolute right-2 bottom-2 cursor-pointer transition-colors"
             onClick={handlePost}
           >
             &#x2713;

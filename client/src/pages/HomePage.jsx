@@ -22,8 +22,8 @@ const HomePage = () => {
 
   const initialLoadDone = useRef(false);
 
-  const apiRoute = "http://localhost:3000/movies";
-  const genreApiRoute = "http://localhost:3000/genres";
+  const moviesApiRoute = import.meta.env.VITE_MOVIES_URL;
+  const genreApiRoute = import.meta.env.VITE_GENRES_URL;
 
   useEffect(() => {
     if (offset === 5 && initialLoadDone.current) return;
@@ -49,12 +49,11 @@ const HomePage = () => {
   const loadMovies = (off, lim) => {
     setIsLoading(true);
     axios
-      .get(apiRoute + `/names?offset=${off}&limit=${lim}`)
+      .get(moviesApiRoute + `/names?offset=${off}&limit=${lim}`)
       .then((res) => {
         setMovies((prev) => [...prev, ...res.data.movies]);
         setLimitReached(res.data.limitReached);
         setMovies((prev) => sortMovies(prev));
-        console.log(movies);
 
         setIsLoading(false);
       })
@@ -78,10 +77,6 @@ const HomePage = () => {
     loadMovies(0, 10);
     setOffset(5);
   };
-
-  useEffect(() => {
-    console.log(criteriaValue);
-  }, [criteriaValue]);
 
   const handleSearch = () => {
     axios
@@ -165,20 +160,22 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="w-full h-full justify-center px-22 pb-12 pt-14 grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1  lg:gap-x-4 gap-y-12 min-w-fit">
-        {!isLoading ? (
-          searched ? (
-            searchedMovies.map((searchedmovie) => (
-              <MovieCard path={searchedmovie.path} key={searchedmovie.path} />
-            ))
+      <div className="flex w-full h-full justify-center items-center">
+        <div className=" px-22 pb-12 pt-14 grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 min-w-fit">
+          {!isLoading ? (
+            searched ? (
+              searchedMovies.map((searchedmovie) => (
+                <MovieCard path={searchedmovie.path} key={searchedmovie.path} />
+              ))
+            ) : (
+              movies.map((movie) => (
+                <MovieCard path={movie.path} key={movie.path} />
+              ))
+            )
           ) : (
-            movies.map((movie) => (
-              <MovieCard path={movie.path} key={movie.path} />
-            ))
-          )
-        ) : (
-          <h1>Loading...</h1>
-        )}
+            <h1>Loading...</h1>
+          )}
+        </div>
       </div>
       <div className="w-max mx-auto mb-10">
         {searched ? null : !limitReached ? (

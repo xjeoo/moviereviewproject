@@ -7,7 +7,7 @@ const Review = ({ userID, rating, text }) => {
 
   const stars = [1, 2, 3, 4, 5];
 
-  const apiRoute = "http://localhost:3000/users";
+  const apiRoute = import.meta.env.VITE_USERS_URL;
 
   useEffect(() => {
     axios
@@ -21,7 +21,7 @@ const Review = ({ userID, rating, text }) => {
   }, []);
 
   return (
-    <div className="flex flex-col outline-1 outline-amber-50 px-8 py-8 rounded-2xl pb-8 max-w-[80%]">
+    <div className="flex flex-col outline-1 outline-amber-50 px-8 py-8 rounded-2xl pb-8 lg:w-200 md:w-150 max-w-[80%]">
       <Link to={`/profile/${userID}`} className="text-2xl max-w-fit">
         {username}
       </Link>
@@ -30,7 +30,9 @@ const Review = ({ userID, rating, text }) => {
           <div key={u}>{u <= rating ? "★" : "☆"}</div>
         ))}
       </div>
-      <p className="text-xl text-gray-200">{text}</p>
+      <p className="flex flex-wrap basis-[100%] text-xl text-gray-200">
+        {text}
+      </p>
     </div>
   );
 };

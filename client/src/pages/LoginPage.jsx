@@ -12,8 +12,12 @@ const LoginPage = () => {
 
   const auth = useAuth();
 
-  const apiRoute = "http://localhost:3000/auth/login";
+  const apiRoute = import.meta.env.VITE_LOGIN_URL;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.data) navigate("/");
+  }, []);
 
   const handleSubmit = () => {
     setError("");

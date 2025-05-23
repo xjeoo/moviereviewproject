@@ -14,7 +14,7 @@ const OwnedReview = ({
 
   const stars = [1, 2, 3, 4, 5];
 
-  const apiRoute = "http://localhost:3000/users";
+  const apiRoute = import.meta.env.VITE_USERS_URL;
 
   useEffect(() => {
     setPosterID(userID);
@@ -29,7 +29,7 @@ const OwnedReview = ({
   }, []);
 
   return (
-    <div className="flex flex-col outline-1 outline-amber-50 px-8 py-8 rounded-2xl pb-8 max-w-[80%] relative">
+    <div className="flex flex-col outline-1 outline-amber-50 px-8 py-8 rounded-2xl pb-8 lg:w-200 md:w-150 max-w-[80%] relative">
       <Link
         to={`/profile/${userID}`}
         className="text-2xl font-bold z-10  inline-block w-max"

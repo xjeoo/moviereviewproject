@@ -10,7 +10,7 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const apiRoute = "http://localhost:3000/auth/register";
+  const apiRoute = import.meta.env.VITE_REGISTER_URL;
   const navigate = useNavigate();
 
   const handleSubmit = () => {
@@ -96,7 +96,7 @@ const RegisterPage = () => {
           </button>
           <p className="text-[#eaeaea] text-[0.9em] mt-3">
             Already have an account?{" "}
-            <Link to={"/login"} className=" text-blue-800 underline">
+            <Link to={"/login"} className=" text-blue-300 underline">
               Sign in now!
             </Link>
           </p>

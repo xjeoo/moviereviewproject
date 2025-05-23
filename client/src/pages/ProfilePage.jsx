@@ -11,12 +11,11 @@ const ProfilePage = () => {
   const [reviewedMovies, setReviewedMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const userInfoRoute = "http://localhost:3000/users?id=";
-  const partialRoute = "http://localhost:3000/users";
+  const userInfoRoute = import.meta.env.VITE_USERS_URL;
   // + "/id/reviews"
   useEffect(() => {
     axios
-      .get(userInfoRoute + id.toString())
+      .get(userInfoRoute + `?id=${id.toString()}`)
       .then((res) => {
         setUser(res.data);
       })
@@ -28,7 +27,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (user) {
       axios
-        .get(partialRoute + `/${user.user_id}/reviews`)
+        .get(userInfoRoute + `/${user.user_id}/reviews`)
         .then((res) => {
           setReviewedMovies(res.data);
           setIsLoading(false);
@@ -45,11 +44,11 @@ const ProfilePage = () => {
       <BackButton />
 
       {!isLoading ? (
-        <div className="w-full min-h-dvh px-15 py-6">
+        <div className="w-full min-h-dvh lg:px-15 py-6 px-4">
           <div className="w-full h-fit flex flex-col gap-6 outline-1 outline-amber-50 rounded-4xl px-16 py-16">
             <h1 className="text-4xl font-bold">{user.username}</h1>
             <h2 className="text-3xl py-10">Reviewed movies:</h2>
-            <div className="flex basis-[100%] flex-wrap gap-10">
+            <div className="flex basis-[100%] flex-wrap justify-center gap-10">
               {reviewedMovies.map((r) => (
                 <MovieCard path={r.path} key={r.path} />
               ))}

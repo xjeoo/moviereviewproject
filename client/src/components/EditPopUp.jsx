@@ -12,7 +12,7 @@ const EditPopUp = ({ movieID, posterID, stopEdit }) => {
   const [error, setError] = useState("");
 
   const auth = useAuth();
-  const apiRoute = "http://localhost:3000/reviews/edit";
+  const apiRoute = import.meta.env.VITE_REVIEWS_EDIT_URL;
   const navigate = useNavigate();
 
   useEffect(() => {

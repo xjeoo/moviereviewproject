@@ -9,7 +9,7 @@ const MovieCard = ({ path }) => {
   const [movieInfo, setMovieInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  const apiRoute = "http://localhost:3000/movies";
+  const apiRoute = import.meta.env.VITE_MOVIES_URL;
 
   useEffect(() => {
     // get movie info by name

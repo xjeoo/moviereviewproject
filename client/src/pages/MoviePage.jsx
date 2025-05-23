@@ -20,18 +20,10 @@ const MoviePage = () => {
 
   const params = useParams();
   const movieName = params.name;
-  const movieApiRoute = "http://localhost:3000/movies";
-  const reviewApiRoute = "http://localhost:3000/reviews";
+  const movieApiRoute = import.meta.env.VITE_MOVIES_URL;
+  const reviewApiRoute = import.meta.env.VITE_REVIEWS_URL;
 
   const auth = useAuth();
-
-  useEffect(() => {
-    try {
-      console.log("succeded");
-    } catch (error) {
-      console.log("failed");
-    }
-  }, [auth.isLoading]);
 
   useEffect(() => {
     // get movie info by name
@@ -44,7 +36,6 @@ const MoviePage = () => {
           .get(reviewApiRoute + `?movieID=${res.data.movie_id}`)
           .then((res) => {
             setReviews(res.data);
-            console.log(res.data);
           })
           .catch((err) => {
             console.log(err.response?.data);
@@ -77,11 +68,7 @@ const MoviePage = () => {
             movieID={movieInfo.movie_id}
             posterID={posterID}
             stopEdit={stopEditing}
-          />{" "}
-          {
-            // AICI TREBUIE SA II DAU SI POSTER ID
-            // PROBABIL FAC UN STATE DE UNDE SA IAU review[index]
-          }
+          />
         </div>
       ) : null}
       {isDeleting ? (
@@ -96,17 +83,17 @@ const MoviePage = () => {
       <Navbar />
 
       <BackButton />
-      <div className="px-20 py-14 min-w-fit max-w-[70%] mx-auto outline-1 outline-amber-50 rounded-4xl my-14 backdrop-blur-xs">
-        <div className="flex md:items-start md:flex-row flex-col justify-center items-center ">
-          <div className="w-95 h-120 min-w-fit">
+      <div className="flex flex-col lg:items-start items-center lg:px-20 py-14 lg:max-w-[70%] mx-auto lg:outline-1 outline-0 outline-amber-50 rounded-4xl my-14 backdrop-blur-xs">
+        <div className="flex lg:items-start lg:flex-row flex-col lg:justify-start justify-center items-center ">
+          <div className="flex lg:justify-start lg:mb-0 mb-4  justify-center w-95 h-120 min-w-fit">
             <img
               src={movieInfo.url}
               alt={movieInfo.movie_name}
-              className="h-full bg-gray-900 rounded-md mr-4 "
+              className="h-full bg-gray-900 rounded-lg lg:mr-4 mr-0 max-w-fit "
             />
           </div>
-          <div className="pl-8 flex flex-col justify-start gap-y-2.5">
-            <h1 className="font-bold text-4xl font-mono">
+          <div className="lg:pl-8 flex flex-col justify-start gap-y-2.5 max-w-[50%]">
+            <h1 className="font-bold text-4xl font-mono min-w-fit max-w-[100%] lg:text-start text-center">
               {movieInfo.movie_name}
             </h1>
             {movieInfo.genres ? (
@@ -114,7 +101,7 @@ const MoviePage = () => {
                 {movieInfo.genres.map((u, index) => (
                   <p
                     key={index}
-                    className="inline-block w-max px-2 outline-1 outline-gray-300 rounded-4xl"
+                    className="inline-block w-fit px-2 outline-1 outline-gray-300 rounded-4xl"
                   >
                     {u.genre_name + " "}
                   </p>
@@ -122,18 +109,22 @@ const MoviePage = () => {
               </div>
             ) : null}
             <p className="text-xl font-bold">⭐ {movieInfo.rating || 0}</p>
-            <div className="flex-1 pt-10 max-w-[70%]">
+            <div className="flex-1 pt-10 md:max-w-fit max-w-[70%] w-fit">
               <h2 className="text-2xl font-bold ">Description:</h2>
-              <article className="italic mt-6">{movieInfo.description}</article>
+              <article className="italic mt-6 w-fit lg:text-[1.05rem] text-xl">
+                {movieInfo.description}
+              </article>
             </div>
-            <div>
+            <div className="w-fit">
               <h2 className="text-2xl font-bold mt-4">Cast:</h2>
-              <article className="italic mt-6">{movieInfo.cast}</article>
+              <article className="italic mt-6 lg:text-[1.05rem] text-xl">
+                {movieInfo.cast}
+              </article>
             </div>
           </div>
         </div>
         <hr className="mt-10" />
-        <div className="flex flex-col pt-10 gap-y-4 max-w-[70%]">
+        <div className="flex flex-col lg:items-start items-center pt-10 gap-y-4 max-w-[95%] w-fit">
           <CreateReview movieID={movieInfo.movie_id} />
           {reviews.length > 0 ? (
             <>
