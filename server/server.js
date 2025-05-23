@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173", // frontend URL
+    origin: "https://moviereviewproject-production.up.railway.app/", // frontend URL
     credentials: true
   }));
 app.use(express.json())
