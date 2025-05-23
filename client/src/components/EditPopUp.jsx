@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const EditPopUp = ({ movieID, posterID, stopEdit }) => {
+const EditPopUp = ({ movieID, posterID, stopEdit, setReviewModified }) => {
   const [text, setText] = useState("");
   const [stars, setStars] = useState(0);
   const rating = [1, 2, 3, 4, 5];
@@ -27,28 +27,31 @@ const EditPopUp = ({ movieID, posterID, stopEdit }) => {
     setError("");
     setSuccess(false);
     if (auth.data === null) navigate("/login");
-    axios
-      .patch(
-        apiRoute,
-        {
-          movie_id: movieID,
-          user_id: auth.data.user_id,
-          rating: stars,
-          text: text,
-        },
-        {
-          headers: { Authorization: `Bearer ${auth.data.access_token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        setSuccess(true);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        setError(err.response?.data);
-      });
+    if (text.trim() === "") setError("Review can't be empty");
+    else
+      axios
+        .patch(
+          apiRoute,
+          {
+            movie_id: movieID,
+            user_id: auth.data.user_id,
+            rating: stars,
+            text: text,
+          },
+          {
+            headers: { Authorization: `Bearer ${auth.data.access_token}` },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          setSuccess(true);
+          stopEdit();
+          setReviewModified(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(err.response?.data);
+        });
   };
 
   useEffect(() => {

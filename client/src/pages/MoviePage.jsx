@@ -17,7 +17,7 @@ const MoviePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [reviewPosted, setReviewPosted] = useState(false);
+  const [reviewModified, setReviewModified] = useState(false);
 
   const params = useParams();
   const movieName = params.name;
@@ -27,20 +27,20 @@ const MoviePage = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    if (reviewPosted) {
+    if (reviewModified) {
       axios
         .get(reviewApiRoute + `?movieID=${movieInfo.movie_id}`)
         .then((res) => {
           console.log(res.data);
           setReviews(res.data);
-          setReviewPosted(false);
+          setReviewModified(false);
         })
         .catch((err) => {
           console.log(err.response?.data);
-          setReviewPosted(false);
+          setReviewModified(false);
         });
     }
-  }, [reviewPosted]);
+  }, [reviewModified]);
 
   useEffect(() => {
     // get movie info by name
@@ -87,6 +87,7 @@ const MoviePage = () => {
             movieID={movieInfo.movie_id}
             posterID={posterID}
             stopEdit={stopEditing}
+            setReviewModified={setReviewModified}
           />
         </div>
       ) : null}
@@ -96,6 +97,7 @@ const MoviePage = () => {
             movieID={movieInfo.movie_id}
             posterID={posterID}
             stopDelete={stopDelete}
+            setReviewModified={setReviewModified}
           />
         </div>
       ) : null}
@@ -146,7 +148,7 @@ const MoviePage = () => {
         <div className="flex flex-col lg:items-start items-center pt-10 gap-y-4 max-w-[95%] w-fit">
           <CreateReview
             movieID={movieInfo.movie_id}
-            setReviewPosted={setReviewPosted}
+            setReviewModified={setReviewModified}
           />
           {reviews.length > 0 ? (
             <>

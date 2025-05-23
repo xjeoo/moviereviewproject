@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const DeletePopUp = ({ movieID, posterID, stopDelete }) => {
+const DeletePopUp = ({ movieID, posterID, stopDelete, setReviewModified }) => {
   const [text, setText] = useState("");
   const [stars, setStars] = useState(0);
   const [reviewID, setReviewID] = useState(null);
@@ -38,7 +38,7 @@ const DeletePopUp = ({ movieID, posterID, stopDelete }) => {
       })
       .then((res) => {
         stopDelete();
-        window.location.reload();
+        setReviewModified(true);
       })
       .catch((err) => {
         console.log(err.response?.data);
