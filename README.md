@@ -7,10 +7,9 @@ Un site simplu pentru review-uri de filme, creat ca proiect de învățare în w
 - Adăugare și citire review-uri
 
 ## Tehnologii folosite
-- HTML
-- CSS
-- JavaScript
-- (Framework/librărie folosită, ex: React)
+- React
+- Express
+- MySQL
 
 ## Link aplicație deploy-uită
 [https://moviereviewproject.vercel.app/](https://moviereviewproject.vercel.app/)
