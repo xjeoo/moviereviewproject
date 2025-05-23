@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 
 app.use(cors({
-    origin: "https://moviereviewproject-production.up.railway.app/", // frontend URL
+    origin: "https://moviereviewproject.vercel.app", // frontend URL
     credentials: true
   }));
 app.use(express.json())
