@@ -1,15 +1,15 @@
 # Movie Review Project
 
-Un site simplu pentru review-uri de filme, creat ca proiect de învățare în web development.
+Un site simplu pentru review-uri de filme, creat ca proiect de invatare in web development.
 
-## Funcționalități
+## Functionalitati
 - Vizualizare liste de filme
-- Adăugare și citire review-uri
+- Adaugare, citire, editare si stergere de review-uri
 
 ## Tehnologii folosite
 - React
 - Express
 - MySQL
 
-## Link aplicație
+## Link aplicatie
 [https://moviereviewproject.vercel.app/](https://moviereviewproject.vercel.app/)
