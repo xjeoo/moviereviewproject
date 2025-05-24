@@ -55,7 +55,7 @@ const DeletePopUp = ({ movieID, posterID, stopDelete, setReviewModified }) => {
         x
       </button>
       <div className="mt-80 flex flex-col items-center">
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-bold px-4">
           Are you sure you want to delete your review?
         </h1>
         <div className="flex gap-10 mt-15">

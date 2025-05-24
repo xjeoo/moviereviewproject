@@ -113,7 +113,7 @@ const MoviePage = () => {
               className="h-full bg-gray-900 rounded-lg lg:mr-4 mr-0 max-w-fit "
             />
           </div>
-          <div className="lg:pl-8 flex flex-col justify-start gap-y-2.5 max-w-[50%]">
+          <div className="lg:pl-8 flex flex-col justify-start gap-y-2.5 lg:max-w-[70%] max-w-[80%]">
             <h1 className="font-bold text-4xl font-mono min-w-fit max-w-[100%] lg:text-start text-center">
               {movieInfo.movie_name}
             </h1>
@@ -130,7 +130,7 @@ const MoviePage = () => {
               </div>
             ) : null}
             <p className="text-xl font-bold">⭐ {movieInfo.rating || 0}</p>
-            <div className="flex-1 pt-10 md:max-w-fit max-w-[70%] w-fit">
+            <div className="flex-1 pt-10 md:max-w-fit lg:max-w-[70%] max-w-fit w-fit">
               <h2 className="text-2xl font-bold ">Description:</h2>
               <article className="italic mt-6 w-fit lg:text-[1.05rem] text-xl">
                 {movieInfo.description}

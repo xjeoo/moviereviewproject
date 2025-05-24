@@ -45,7 +45,7 @@ const OwnedReview = ({
       </div>
       <p className="text-xl text-gray-200 z-10 inline-block w-max">{text}</p>
 
-      <div className="absolute flex justify-end ml-[-2rem] mt-[-2rem] pr-6 pt-3 h-full w-full items-baseline">
+      <div className="absolute flex justify-end lg:ml-[-2rem] ml-[-1rem] mt-[-2rem] pr-6 pt-3 h-full w-full items-baseline">
         <div className="flex gap-3">
           <button
             className="outline-1 outline-white px-2 py-0.5 rounded-4xl hover:bg-white hover:outline-white hover:text-black cursor-pointer transition-colors"

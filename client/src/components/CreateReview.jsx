@@ -76,7 +76,7 @@ const CreateReview = ({ movieID, setReviewModified }) => {
           ))}
         </div>
         <textarea
-          className="min-h-20 min-w-80 bg-gray-300 text-black px-4 py-3 rounded-xl w-full"
+          className="md:min-h-25 min-h-30 sm:min-w-100 min-w-70 bg-gray-300 text-black px-4 py-3 rounded-xl w-full"
           placeholder="Type your review:"
           value={text}
           onChange={(e) => {
