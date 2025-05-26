@@ -43,7 +43,9 @@ const OwnedReview = ({
           </div>
         ))}
       </div>
-      <p className="text-xl text-gray-200 z-10 inline-block w-max">{text}</p>
+      <p className="flex flex-wrap basis-[100%] text-xl text-gray-200">
+        {text}
+      </p>
 
       <div className="absolute flex justify-end lg:ml-[-2rem] ml-[-1rem] mt-[-2rem] pr-6 pt-3 h-full w-full items-baseline">
         <div className="flex gap-3">
